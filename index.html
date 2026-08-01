@@ -1,157 +1,384 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Techno — Apple, PlayStation y Samsung importados en Olavarría</title>
-<meta name="description" content="iPhone, Mac, iPad, Apple Watch, PlayStation y Samsung importados directo desde USA. Garantía oficial, precio justo, sin intermediarios.">
-<meta property="og:title" content="Techno — Apple, PlayStation y Samsung importados en Olavarría">
-<meta property="og:description" content="Consultá stock y precio por WhatsApp. Garantía oficial, sin intermediarios.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Techno — Apple, PlayStation y Samsung en Olavarría, Azul y Tandil</title>
+<meta name="description" content="Tecnología importada de USA. Te la entrego en mano en Olavarría, Azul o Tandil: abrís la caja, revisás el equipo, y recién ahí pagás.">
+<meta property="og:title" content="Techno — tecnología importada, entregada en mano">
+<meta property="og:description" content="Apple, PlayStation y Samsung traídos de USA. Entrega en mano en Olavarría, Azul y Tandil.">
+<meta property="og:image" content="img/nani.jpg">
+<meta name="theme-color" content="#14653F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b0b0d; --panel:#151518; --line:rgba(255,255,255,.09);
-  --fg:#f5f5f7; --muted:rgba(245,245,247,.62);
-  --blue:#0a84ff; --white:#fff;
-  --font-display:'Inter',sans-serif; --font-mono:'Space Mono',monospace;
+  --paper:#FAF8F5; --card:#FFFFFF; --ink:#1A1815; --muted:#6E675E;
+  --rule:#E4DED5; --accent:#14653F; --accent-ink:#FFFFFF; --accent-soft:#14653F14;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --wrap:1100px;
 }
-*{margin:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--font-display);line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-header{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
-.wordmark{font-weight:800;font-size:20px;letter-spacing:-.02em}
-.wordmark span{color:var(--blue)}
-.btn{display:inline-block;background:var(--blue);color:#fff;font-weight:700;padding:13px 26px;border-radius:999px;text-decoration:none;font-size:15px}
-.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
-.eyebrow{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--blue)}
-.hero{padding:80px 0 60px;text-align:center}
-.hero h1{font-size:clamp(36px,6vw,60px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:16px auto 20px;max-width:820px}
-.hero p{font-size:19px;color:var(--muted);max-width:560px;margin:0 auto 32px}
-section{padding:60px 0}
-h2{font-size:clamp(24px,3.5vw,34px);font-weight:800;letter-spacing:-.01em;margin:12px 0 32px}
-.brands{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:8px}
-.chip{background:var(--panel);border:1px solid var(--line);padding:8px 18px;border-radius:999px;font-size:14px;color:var(--muted)}
-.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px}
-.card h3{font-size:19px;font-weight:700;margin-bottom:4px}
-.card .tag{font-family:var(--font-mono);font-size:12px;color:var(--blue);text-transform:uppercase;letter-spacing:.1em}
-.card ul{list-style:none;margin-top:16px;color:var(--muted);font-size:15px}
-.card li{padding:5px 0;border-top:1px solid var(--line)}
-.card li:first-child{border-top:none}
-.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.why .num{font-family:var(--font-mono);color:var(--blue);font-size:13px;margin-bottom:10px}
-.cta{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:56px 40px;text-align:center}
-.cta h2{margin-bottom:10px}
-.cta p{color:var(--muted);margin-bottom:26px}
-footer.site{padding:36px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line)}
-footer.site .mono{font-family:var(--font-mono)}
-a{color:var(--blue)}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130F; --card:#1D1B17; --ink:#F0EDE7; --muted:#A19A8E;
+         --rule:#33302A; --accent:#3FA97A; --accent-ink:#0B1F16; --accent-soft:#3FA97A1A; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+@media(min-width:860px){section{padding:88px 0}}
+
+h1,h2,h3{font-family:var(--display);letter-spacing:-.025em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,7vw,3.6rem);font-weight:800;line-height:1.04}
+h2{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:700;line-height:1.12}
+h3{font-size:1.06rem;font-weight:700}
+p{margin:0}
+.lede{font-size:clamp(1.02rem,2.4vw,1.2rem);color:var(--muted);max-width:46ch}
+.eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.18em;
+         text-transform:uppercase;color:var(--accent)}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+     background:var(--accent);color:var(--accent-ink);font-family:var(--body);
+     font-weight:600;font-size:1rem;padding:15px 26px;border:2px solid var(--accent);
+     text-decoration:none;transition:filter .15s}
+.btn:hover{filter:brightness(1.12)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn.sm{padding:10px 14px;font-size:.86rem;width:100%}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn.ghost:hover{border-color:var(--ink)}
+
+/* barra fija */
+.bar{position:sticky;top:0;z-index:50;background:var(--paper);
+     border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding-top:11px;padding-bottom:11px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.03em;
+       text-decoration:none}
+.brand span{font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.13em;
+            color:var(--muted);display:block;text-transform:uppercase;margin-top:-2px}
+.bar .btn{margin-left:auto;padding:10px 17px;font-size:.9rem}
+
+/* hero */
+.hero .wrap{display:grid;gap:32px}
+@media(min-width:860px){
+  .hero .wrap{grid-template-columns:1fr .82fr;gap:56px;align-items:center}
+}
+.hero-copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.hero-fig{margin:0}
+.hero-fig img{width:100%;border:1px solid var(--rule);
+              max-height:460px;object-fit:cover;object-position:center 22%}
+@media(min-width:860px){.hero-fig img{max-height:600px}}
+.hero-fig figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted);
+                     margin-top:10px;letter-spacing:.02em}
+.trust-line{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.88rem;color:var(--muted);
+            font-weight:500}
+.trust-line b{color:var(--ink);font-weight:600}
+
+/* separador con el motivo de la ruta */
+.route{display:flex;align-items:center;gap:0;height:1px;background:var(--rule);
+       position:relative;max-width:var(--wrap);margin:0 auto}
+.route::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;
+              background:var(--accent);border-radius:50%;transform:translate(-50%,-50%)}
+
+/* pasos */
+.steps{display:grid;gap:22px;margin-top:30px}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:34px}}
+.step{display:flex;flex-direction:column;gap:8px;border-top:2px solid var(--ink);padding-top:14px}
+.step .n{font-family:var(--mono);font-size:.74rem;font-weight:600;color:var(--accent);
+         letter-spacing:.1em}
+.step p{color:var(--muted);font-size:.95rem}
+
+/* productos */
+.head-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;justify-content:space-between}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--card);border:1px solid var(--rule);padding:12px;
+      display:flex;flex-direction:column;gap:9px}
+.card img{aspect-ratio:1;object-fit:contain;background:#fff;width:100%}
+.card h3{font-size:.95rem;line-height:1.25}
+.card .spec{font-size:.76rem;color:var(--muted);margin-top:-4px}
+.card .price{font-family:var(--mono);font-weight:600;font-size:1.06rem;
+             font-variant-numeric:tabular-nums;margin-top:auto;padding-top:4px}
+.pay-note{font-size:.85rem;color:var(--muted);margin-top:22px;max-width:60ch}
+
+/* quién soy */
+.about{display:grid;gap:34px}
+@media(min-width:860px){.about{grid-template-columns:1fr 1fr;gap:56px;align-items:center}}
+.me{display:flex;gap:18px;align-items:flex-start}
+.me img{width:96px;height:96px;object-fit:cover;flex:none;border:1px solid var(--rule)}
+.me .who{display:flex;flex-direction:column;gap:7px}
+.me h3{font-size:1.2rem}
+.me p{color:var(--muted);font-size:.95rem}
+.map-fig{margin:0;background:var(--card);border:1px solid var(--rule);padding:18px}
+.map-fig figcaption{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;
+                    text-transform:uppercase;color:var(--muted);margin-top:8px}
+
+/* garantía */
+.safety{background:var(--accent-soft);border-left:3px solid var(--accent);padding:26px 24px;
+        display:flex;flex-direction:column;gap:12px}
+.safety p{max-width:58ch;color:var(--ink)}
+
+/* faq */
+.faq{margin-top:26px;border-top:1px solid var(--rule)}
+details{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;padding:17px 0;font-weight:600;font-size:1rem;list-style:none;
+        display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:1.2rem;flex:none}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 17px;color:var(--muted);max-width:62ch;font-size:.95rem}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* cierre */
+.close{text-align:center;display:flex;flex-direction:column;gap:20px;align-items:center}
+.close h2{max-width:16ch}
+
+footer{border-top:1px solid var(--rule);padding:34px 0 46px;font-size:.85rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+footer a{text-decoration:none;font-weight:500}
+footer a:hover{color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="wordmark">Techno<span>.</span></div>
-    <a class="btn" href="https://wa.me/5491162310105" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-  </header>
 
-  <div class="hero">
-    <div class="eyebrow">Importados · Olavarría</div>
-    <h1>Apple, PlayStation y Samsung directo desde USA.</h1>
-    <p>Garantía oficial, precio justo, sin intermediarios. Consultá stock y precio del modelo que buscás.</p>
-    <a class="btn" href="https://wa.me/5491162310105" target="_blank" rel="noopener">Consultar stock y precio</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#">Techno<span>Olavarría · Azul · Tandil</span></a>
+    <a class="btn" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20vi%20la%20p%C3%A1gina.%20Quer%C3%ADa%20consultarte%20por..."
+       target="_blank" rel="noopener">WhatsApp</a>
   </div>
+</header>
 
-  <section>
-    <div class="eyebrow" style="text-align:center;display:block">Marcas</div>
-    <div class="brands">
-      <span class="chip">Apple</span><span class="chip">PlayStation</span><span class="chip">Samsung</span>
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Importado de USA · Entrega en mano</p>
+        <h1>Lo abrís, lo revisás, y recién ahí pagás.</h1>
+        <p class="lede">Apple, PlayStation y Samsung traídos de Estados Unidos. Nos encontramos en Olavarría, Azul o Tandil y te lo entrego en la mano. Te atiendo yo, no un bot.</p>
+        <a class="btn" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20vi%20la%20p%C3%A1gina.%20Quer%C3%ADa%20consultarte%20por..."
+           target="_blank" rel="noopener">Escribime por WhatsApp</a>
+        <div class="trust-line">
+          <span><b>Sellado</b> y con garantía</span>
+          <span>Pagás <b>después</b> de revisarlo</span>
+          <span>Envíos al <b>resto del país</b></span>
+        </div>
+      </div>
+      <figure class="hero-fig">
+        <img src="img/nani.jpg" alt="Nani sosteniendo la caja sellada de su iPhone 15 rosa recién entregado" width="619" height="1100">
+        <figcaption>Nani, con su iPhone 15 recién entregado.</figcaption>
+      </figure>
     </div>
   </section>
 
+  <!--
+    CUANDO TENGAS MÁS FOTOS DE ENTREGAS, va acá una franja de 3 o 4.
+    Mientras haya una sola, es mejor que esté grande arriba y no repetida.
+  -->
+
+  <div class="route"></div>
+
   <section>
-    <h2>Lo que manejamos</h2>
-    <div class="cats">
-      <div class="card">
-        <div class="tag">Apple · iPhone</div>
-        <h3>iPhone 16 &amp; 17</h3>
-        <ul>
-          <li>iPhone 16 / 16 Plus / 16 Pro / 16 Pro Max</li>
-          <li>iPhone 17 / 17 Plus / 17 Pro / 17 Pro Max</li>
-          <li>iPhone Air</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Apple · Mac</div>
-        <h3>MacBook, Mac mini &amp; Studio</h3>
-        <ul>
-          <li>MacBook Air M3 / M4 / M5</li>
-          <li>MacBook Pro M4 / M5</li>
-          <li>Mac mini M4 / M4 Pro, Mac Studio M4 Max</li>
-          <li>iMac M4 24"</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Apple · iPad &amp; Watch</div>
-        <h3>iPad y Apple Watch</h3>
-        <ul>
-          <li>iPad Air M2 (11" / 13")</li>
-          <li>iPad Pro M4 (11" / 13")</li>
-          <li>Apple Watch Series 10, Watch Ultra 2</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Apple · Accesorios</div>
-        <h3>Accesorios originales</h3>
-        <ul>
-          <li>AirPods 4, AirPods Pro 2, AirPods Max</li>
-          <li>Magic Keyboard, Mouse, Trackpad</li>
-          <li>Cargadores MagSafe y USB-C, fundas y sleeves</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">PlayStation</div>
-        <h3>PS5 &amp; accesorios</h3>
-        <ul>
-          <li>PS5 Slim (solo, + DualSense, o + God of War Ragnarök)</li>
-          <li>DualSense Edge</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Samsung</div>
-        <h3>Galaxy</h3>
-        <ul>
-          <li>Galaxy S25 / S25+ / S25 Ultra</li>
-          <li>Galaxy Tab S10+</li>
-          <li>Galaxy Buds3 Pro</li>
-        </ul>
+    <div class="wrap">
+      <p class="eyebrow">Cómo es comprarme</p>
+      <h2>Tres pasos, sin adelantar plata.</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="n">01</span>
+          <h3>Me escribís</h3>
+          <p>Me decís qué modelo buscás y te paso el precio y la disponibilidad del día.</p>
+        </div>
+        <div class="step">
+          <span class="n">02</span>
+          <h3>Coordinamos</h3>
+          <p>Arreglamos dónde y cuándo nos encontramos: Olavarría, Azul o Tandil.</p>
+        </div>
+        <div class="step">
+          <span class="n">03</span>
+          <h3>Revisás y pagás</h3>
+          <p>Abrís la caja delante mío, probás el equipo, y recién ahí me pagás.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>Por qué comprar acá</h2>
-    <div class="why">
-      <div class="card"><div class="num">01</div><b>Garantía oficial</b><p style="color:var(--muted);margin-top:8px">Todo lo que vendemos viene con garantía, no es de reventa sin respaldo.</p></div>
-      <div class="card"><div class="num">02</div><b>Precio justo</b><p style="color:var(--muted);margin-top:8px">Importado directo, sin intermediarios que infl en el precio final.</p></div>
-      <div class="card"><div class="num">03</div><b>Consulta directa</b><p style="color:var(--muted);margin-top:8px">Stock real y precio actualizado por WhatsApp, sin vueltas.</p></div>
+  <div class="route"></div>
+
+  <section id="productos">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h2>Algunos de los que traigo.</h2>
+        </div>
+        <p class="lede" style="margin-bottom:4px">Tengo más de 100 modelos en lista. Si no ves el tuyo, preguntame.</p>
+      </div>
+
+      <div class="grid">
+
+        <article class="card">
+          <img src="img/airpods-pro-3a-gen.jpg" alt="AirPods Pro 3ª generación en su estuche de carga" loading="lazy" width="900" height="900">
+          <h3>AirPods Pro 3</h3>
+          <p class="spec">3ª generación</p>
+          <p class="price">USD 335</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesan%20los%20AirPods%20Pro%203.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+        <article class="card">
+          <img src="img/apple-watch-s11-42mm.jpg" alt="Apple Watch Series 11 con malla deportiva y malla milanesa" loading="lazy" width="900" height="900">
+          <h3>Apple Watch S11</h3>
+          <p class="spec">42 mm</p>
+          <p class="price">USD 480</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20Apple%20Watch%20S11%2042mm.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+        <article class="card">
+          <img src="img/ipad-11a-gen-128gb.jpg" alt="iPad de 11ª generación en varios colores" loading="lazy" width="900" height="900">
+          <h3>iPad 11ª Gen</h3>
+          <p class="spec">128 GB</p>
+          <p class="price">USD 570</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPad%2011%C2%AA%20Gen%20128GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+        <article class="card">
+          <img src="img/iphone-16-128gb.jpg" alt="iPhone 16 en los cinco colores disponibles" loading="lazy" width="900" height="900">
+          <h3>iPhone 16</h3>
+          <p class="spec">128 GB</p>
+          <p class="price">USD 910</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPhone%2016%20128GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+        <article class="card">
+          <img src="img/mac-mini-m4-256gb.jpg" alt="Mac mini con chip M4" loading="lazy" width="900" height="900">
+          <h3>Mac mini M4</h3>
+          <p class="spec">256 GB · 16 GB RAM</p>
+          <p class="price">USD 945</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20la%20Mac%20mini%20M4%20256GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+        <article class="card">
+          <img src="img/iphone-17-256gb.jpg" alt="iPhone 17 en los cinco colores disponibles" loading="lazy" width="900" height="900">
+          <h3>iPhone 17</h3>
+          <p class="spec">256 GB</p>
+          <p class="price">USD 1.030</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPhone%2017%20256GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+        <article class="card">
+          <img src="img/iphone-17-pro-256gb.jpg" alt="iPhone 17 Pro naranja y azul sostenidos en dos manos" loading="lazy" width="900" height="900">
+          <h3>iPhone 17 Pro</h3>
+          <p class="spec">256 GB</p>
+          <p class="price">USD 1.235</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPhone%2017%20Pro%20256GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+        <article class="card">
+          <img src="img/macbook-air-m4-13in.jpg" alt="MacBook Air abierta, vista frontal" loading="lazy" width="900" height="900">
+          <h3>MacBook Air M4 13"</h3>
+          <p class="spec">256 GB · 16 GB RAM</p>
+          <p class="price">USD 1.255</p>
+          <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20la%20MacBook%20Air%20M4%2013%22%20256GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
+        </article>
+
+      </div>
+
+      <p class="pay-note">Precios en dólares. Se puede pagar en USD efectivo, USDT o transferencia en pesos (+4%). Los precios pueden cambiar según disponibilidad — confirmalos por WhatsApp antes de coordinar.</p>
     </div>
   </section>
 
+  <div class="route"></div>
+
   <section>
-    <div class="cta">
-      <h2>¿Buscás un modelo puntual?</h2>
-      <p>Consultanos disponibilidad y precio actual. Te respondemos por WhatsApp.</p>
-      <a class="btn" href="https://wa.me/5491162310105" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    <div class="wrap about">
+      <div class="me-block">
+        <p class="eyebrow">Quién te vende</p>
+        <h2 style="margin-bottom:24px">No es una tienda. Soy yo.</h2>
+        <div class="me">
+          <img src="img/guido.jpg" alt="Foto de Guido" width="480" height="483">
+          <div class="who">
+            <h3>Guido</h3>
+            <p>Traigo tecnología de Estados Unidos desde 2023. Contesto yo los mensajes, coordino yo las entregas y te la doy yo en la mano. Si tenés un problema después, me escribís a mí.</p>
+          </div>
+        </div>
+      </div>
+      <figure class="map-fig">
+        <img src="img/zona-entrega.svg" alt="Mapa del corredor de la Ruta 226 con Olavarría, Azul y Tandil marcadas como zona de entrega en mano">
+        <figcaption>Entrega en mano sobre la RN 226</figcaption>
+      </figure>
     </div>
   </section>
 
-  <footer class="site">
-    <span class="mono">@techno.apple.ok</span>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="safety">
+        <h2 style="font-size:1.4rem">¿Y si viene fallado?</h2>
+        <p>Todos los equipos salen sellados y con garantía. Si tiene una falla de fábrica, te lo cambio. Y si al abrir la caja no es lo que esperabas, no pagás y no pasa nada — por eso pagás al final y no antes.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="route"></div>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Preguntas</p>
+      <h2>Lo que más me preguntan.</h2>
+      <div class="faq">
+        <details>
+          <summary>¿Los precios son en dólares?</summary>
+          <p>Sí, todos los precios están en dólares estadounidenses. Podés pagar en USD efectivo, en USDT, o por transferencia en pesos con un 4% de recargo.</p>
+        </details>
+        <details>
+          <summary>¿Son equipos nuevos?</summary>
+          <p>Sí, salvo que el aviso diga otra cosa. Vienen sellados de fábrica y con garantía. Los abrís vos delante mío en el momento de la entrega.</p>
+        </details>
+        <details>
+          <summary>¿Hacés envíos fuera de la zona?</summary>
+          <p>En Olavarría, Azul, Tandil y alrededores entrego en mano. Al resto del país lo mando por correo — escribime y lo coordinamos.</p>
+        </details>
+        <details>
+          <summary>¿Puedo encargar un modelo que no está en la lista?</summary>
+          <p>Sí. Estos son solo algunos: manejo más de cien modelos entre Apple, PlayStation y Samsung. Decime cuál buscás y te digo precio y en cuánto lo tengo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="route"></div>
+
+  <section>
+    <div class="wrap close">
+      <h2>Decime qué buscás y te paso precio hoy.</h2>
+      <a class="btn" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20busco%20un...%20%C2%BFLo%20consegu%C3%ADs%3F"
+         target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      <p class="lede" style="max-width:34ch">Contesto todos los días. Si no llego en el momento, te respondo en el día.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
     <span>© 2026 Techno</span>
-  </footer>
-</div>
+    <a href="https://instagram.com/techno.apple.ok" target="_blank" rel="noopener">@techno.apple.ok</a>
+    <a href="https://wa.me/5491162310105" target="_blank" rel="noopener">WhatsApp +54 9 11 6231-0105</a>
+    <span>Olavarría · Azul · Tandil</span>
+  </div>
+</footer>
+
 </body>
 </html>
