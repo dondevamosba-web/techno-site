@@ -82,11 +82,49 @@ p{margin:0}
             font-weight:500}
 .trust-line b{color:var(--ink);font-weight:600}
 
-/* separador con el motivo de la ruta */
-.route{display:flex;align-items:center;gap:0;height:1px;background:var(--rule);
-       position:relative;max-width:var(--wrap);margin:0 auto}
-.route::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;
-              background:var(--accent);border-radius:50%;transform:translate(-50%,-50%)}
+/* separador con el motivo de la ruta: se dibuja de izq a der al entrar en pantalla */
+.route{position:relative;max-width:var(--wrap);margin:0 auto;height:1px;background:var(--rule);
+       overflow:hidden}
+.route::before{content:"";position:absolute;inset:0;background:var(--accent);
+               transform:scaleX(0);transform-origin:left;
+               transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.route.is-visible::before{transform:scaleX(1)}
+.route::after{content:"";position:absolute;left:0;top:50%;width:7px;height:7px;
+              background:var(--accent);border-radius:50%;transform:translate(-3.5px,-50%) scale(0);
+              transition:transform .45s ease .95s, left 1.1s cubic-bezier(.2,.7,.2,1)}
+.route.is-visible::after{left:100%;transform:translate(-3.5px,-50%) scale(1)}
+
+/* aparicion en cascada al scrollear */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.is-visible{opacity:1;transform:none}
+.reveal-group.is-visible .reveal-item{opacity:1;transform:none}
+.reveal-item{opacity:0;transform:translateY(18px);
+             transition:opacity .6s ease,transform .6s ease}
+.reveal-item:nth-child(1){transition-delay:.03s}
+.reveal-item:nth-child(2){transition-delay:.1s}
+.reveal-item:nth-child(3){transition-delay:.17s}
+.reveal-item:nth-child(4){transition-delay:.24s}
+.reveal-item:nth-child(5){transition-delay:.31s}
+.reveal-item:nth-child(6){transition-delay:.38s}
+.reveal-item:nth-child(7){transition-delay:.45s}
+.reveal-item:nth-child(8){transition-delay:.52s}
+
+/* parallax sutil en la foto del hero */
+.hero-fig img{will-change:transform}
+
+/* pulso suave en el CTA principal, una sola vez */
+@keyframes pulse-ring{
+  0%{box-shadow:0 0 0 0 var(--accent-soft)}
+  70%{box-shadow:0 0 0 12px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+.pulse-once{animation:pulse-ring 1.7s ease-out 1}
+
+@media (prefers-reduced-motion:reduce){
+  .route::before,.route::after{transition:none!important}
+  .reveal,.reveal-item{opacity:1!important;transform:none!important;transition:none!important}
+  .pulse-once{animation:none!important}
+}
 
 /* pasos */
 .steps{display:grid;gap:22px;margin-top:30px}
@@ -173,11 +211,11 @@ footer a:hover{color:var(--ink)}
 
   <section class="hero">
     <div class="wrap">
-      <div class="hero-copy">
+      <div class="hero-copy reveal">
         <p class="eyebrow">Importado de USA · Entrega en mano</p>
         <h1>Lo abrís, lo revisás, y recién ahí pagás.</h1>
         <p class="lede">Apple, PlayStation y Samsung traídos de Estados Unidos. Estamos en Olavarría y te lo entregamos en la mano, acá o en toda la zona.</p>
-        <a class="btn" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20vi%20la%20p%C3%A1gina.%20Quer%C3%ADa%20consultarte%20por..."
+        <a class="btn" data-pulse href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20vi%20la%20p%C3%A1gina.%20Quer%C3%ADa%20consultarte%20por..."
            target="_blank" rel="noopener">Escribime por WhatsApp</a>
         <div class="trust-line">
           <span><b>Sellado</b> y con garantía</span>
@@ -185,7 +223,7 @@ footer a:hover{color:var(--ink)}
           <span>Envíos al <b>resto del país</b></span>
         </div>
       </div>
-      <figure class="hero-fig">
+      <figure class="hero-fig reveal" style="transition-delay:.12s" data-parallax>
         <img src="img/guido-retrato.jpg" alt="Retrato en blanco y negro de Guido, de Techno" width="768" height="1024">
         <figcaption>Guido — Techno, Olavarría.</figcaption>
       </figure>
@@ -203,18 +241,18 @@ footer a:hover{color:var(--ink)}
     <div class="wrap">
       <p class="eyebrow">Cómo es comprarme</p>
       <h2>Tres pasos, sin adelantar plata.</h2>
-      <div class="steps">
-        <div class="step">
+      <div class="steps reveal-group">
+        <div class="step reveal-item">
           <span class="n">01</span>
           <h3>Me escribís</h3>
           <p>Me decís qué modelo buscás y te paso el precio y la disponibilidad del día.</p>
         </div>
-        <div class="step">
+        <div class="step reveal-item">
           <span class="n">02</span>
           <h3>Coordinamos</h3>
           <p>Estamos en Olavarría. Arreglamos dónde y cuándo nos vemos, acá o en la zona.</p>
         </div>
-        <div class="step">
+        <div class="step reveal-item">
           <span class="n">03</span>
           <h3>Revisás y pagás</h3>
           <p>Abrís la caja delante mío, probás el equipo, y recién ahí me pagás.</p>
@@ -235,9 +273,9 @@ footer a:hover{color:var(--ink)}
         <p class="lede" style="margin-bottom:4px">Tengo más de 100 modelos en lista. Si no ves el tuyo, preguntame.</p>
       </div>
 
-      <div class="grid">
+      <div class="grid reveal-group">
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/airpods-pro-3a-gen.jpg" alt="AirPods Pro 3ª generación en su estuche de carga" loading="lazy" width="900" height="900">
           <h3>AirPods Pro 3</h3>
           <p class="spec">3ª generación</p>
@@ -245,7 +283,7 @@ footer a:hover{color:var(--ink)}
           <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesan%20los%20AirPods%20Pro%203.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
         </article>
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/apple-watch-s11-42mm.jpg" alt="Apple Watch Series 11 con malla deportiva y malla milanesa" loading="lazy" width="900" height="900">
           <h3>Apple Watch S11</h3>
           <p class="spec">42 mm</p>
@@ -253,7 +291,7 @@ footer a:hover{color:var(--ink)}
           <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20Apple%20Watch%20S11%2042mm.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
         </article>
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/ipad-11a-gen-128gb.jpg" alt="iPad de 11ª generación en varios colores" loading="lazy" width="900" height="900">
           <h3>iPad 11ª Gen</h3>
           <p class="spec">128 GB</p>
@@ -261,7 +299,7 @@ footer a:hover{color:var(--ink)}
           <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPad%2011%C2%AA%20Gen%20128GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
         </article>
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/iphone-16-128gb.jpg" alt="iPhone 16 en los cinco colores disponibles" loading="lazy" width="900" height="900">
           <h3>iPhone 16</h3>
           <p class="spec">128 GB</p>
@@ -269,7 +307,7 @@ footer a:hover{color:var(--ink)}
           <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPhone%2016%20128GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
         </article>
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/mac-mini-m4-256gb.jpg" alt="Mac mini con chip M4" loading="lazy" width="900" height="900">
           <h3>Mac mini M4</h3>
           <p class="spec">256 GB · 16 GB RAM</p>
@@ -277,7 +315,7 @@ footer a:hover{color:var(--ink)}
           <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20la%20Mac%20mini%20M4%20256GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
         </article>
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/iphone-17-256gb.jpg" alt="iPhone 17 en los cinco colores disponibles" loading="lazy" width="900" height="900">
           <h3>iPhone 17</h3>
           <p class="spec">256 GB</p>
@@ -285,7 +323,7 @@ footer a:hover{color:var(--ink)}
           <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPhone%2017%20256GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
         </article>
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/iphone-17-pro-256gb.jpg" alt="iPhone 17 Pro naranja y azul sostenidos en dos manos" loading="lazy" width="900" height="900">
           <h3>iPhone 17 Pro</h3>
           <p class="spec">256 GB</p>
@@ -293,7 +331,7 @@ footer a:hover{color:var(--ink)}
           <a class="btn sm" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20me%20interesa%20el%20iPhone%2017%20Pro%20256GB.%20%C2%BFTen%C3%A9s%20stock%3F" target="_blank" rel="noopener">Consultar</a>
         </article>
 
-        <article class="card">
+        <article class="card reveal-item">
           <img src="img/macbook-air-m4-13in.jpg" alt="MacBook Air abierta, vista frontal" loading="lazy" width="900" height="900">
           <h3>MacBook Air M4 13"</h3>
           <p class="spec">256 GB · 16 GB RAM</p>
@@ -313,8 +351,8 @@ footer a:hover{color:var(--ink)}
     <div class="wrap">
       <p class="eyebrow">Nuestros clientes</p>
       <h2>Gente de la zona que ya compró.</h2>
-      <div class="clients">
-        <figure class="client">
+      <div class="clients reveal-group">
+        <figure class="client reveal-item">
           <img src="img/nani.jpg" alt="Nani sosteniendo la caja sellada de su iPhone 15 rosa recién entregado" loading="lazy" width="619" height="1100">
           <figcaption>Nani, con su iPhone 15 recién entregado.</figcaption>
         </figure>
@@ -330,8 +368,8 @@ footer a:hover{color:var(--ink)}
   <div class="route"></div>
 
   <section>
-    <div class="wrap about">
-      <div class="me-block">
+    <div class="wrap about reveal-group">
+      <div class="me-block reveal-item">
         <p class="eyebrow">Dónde estamos</p>
         <h2 style="margin-bottom:24px">Estamos en Olavarría.</h2>
         <div class="me">
@@ -340,7 +378,7 @@ footer a:hover{color:var(--ink)}
           </div>
         </div>
       </div>
-      <figure class="map-fig">
+      <figure class="map-fig reveal-item">
         <img src="img/zona-entrega.svg" alt="Mapa del corredor de la Ruta 226 con Olavarría, Azul y Tandil marcadas como zona de entrega en mano">
         <figcaption>Entrega en mano sobre la RN 226</figcaption>
       </figure>
@@ -349,7 +387,7 @@ footer a:hover{color:var(--ink)}
 
   <section style="padding-top:0">
     <div class="wrap">
-      <div class="safety">
+      <div class="safety reveal">
         <h2 style="font-size:1.4rem">¿Y si viene fallado?</h2>
         <p>Todos los equipos salen sellados y con garantía. Si tiene una falla de fábrica, te lo cambio. Y si al abrir la caja no es lo que esperabas, no pagás y no pasa nada — por eso pagás al final y no antes.</p>
       </div>
@@ -362,20 +400,20 @@ footer a:hover{color:var(--ink)}
     <div class="wrap">
       <p class="eyebrow">Preguntas</p>
       <h2>Lo que más me preguntan.</h2>
-      <div class="faq">
-        <details>
+      <div class="faq reveal-group">
+        <details class="reveal-item">
           <summary>¿Los precios son en dólares?</summary>
           <p>Sí, todos los precios están en dólares estadounidenses. Podés pagar en USD efectivo, en USDT, o por transferencia en pesos con un 4% de recargo.</p>
         </details>
-        <details>
+        <details class="reveal-item">
           <summary>¿Son equipos nuevos?</summary>
           <p>Sí, salvo que el aviso diga otra cosa. Vienen sellados de fábrica y con garantía. Los abrís vos delante mío en el momento de la entrega.</p>
         </details>
-        <details>
+        <details class="reveal-item">
           <summary>¿Hacés envíos fuera de la zona?</summary>
           <p>Estamos en Olavarría, y entregamos en mano acá y en toda la zona: Azul, Tandil y alrededores. Al resto del país lo mandamos por correo — escribinos y lo coordinamos.</p>
         </details>
-        <details>
+        <details class="reveal-item">
           <summary>¿Puedo encargar un modelo que no está en la lista?</summary>
           <p>Sí. Estos son solo algunos: manejo más de cien modelos entre Apple, PlayStation y Samsung. Decime cuál buscás y te digo precio y en cuánto lo tengo.</p>
         </details>
@@ -386,9 +424,9 @@ footer a:hover{color:var(--ink)}
   <div class="route"></div>
 
   <section>
-    <div class="wrap close">
+    <div class="wrap close reveal">
       <h2>Decime qué buscás y te paso precio hoy.</h2>
-      <a class="btn" href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20busco%20un...%20%C2%BFLo%20consegu%C3%ADs%3F"
+      <a class="btn" data-pulse href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20busco%20un...%20%C2%BFLo%20consegu%C3%ADs%3F"
          target="_blank" rel="noopener">Consultar por WhatsApp</a>
       <p class="lede" style="max-width:34ch">Contesto todos los días. Si no llego en el momento, te respondo en el día.</p>
     </div>
@@ -404,6 +442,73 @@ footer a:hover{color:var(--ink)}
     <span>Olavarría, Buenos Aires</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // --- aparicion al scrollear: secciones + su .route anterior ---------------
+  var targets = document.querySelectorAll(".reveal, .reveal-group");
+  if (reduced || !("IntersectionObserver" in window)) {
+    targets.forEach(function (el) { el.classList.add("is-visible"); });
+    document.querySelectorAll(".route").forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    targets.forEach(function (el) { io.observe(el); });
+
+    // la linea de "ruta" se dibuja cuando la sección que sigue entra en vista
+    var routes = document.querySelectorAll(".route");
+    var ioRoute = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        ioRoute.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+    routes.forEach(function (el) { ioRoute.observe(el); });
+  }
+
+  // --- parallax sutil en la foto del hero, con rAF ---------------------------
+  var figs = document.querySelectorAll("[data-parallax] img");
+  if (!reduced && figs.length) {
+    var ticking = false;
+    function applyParallax() {
+      var y = window.scrollY || 0;
+      var shift = Math.max(-18, Math.min(18, y * -0.05));
+      figs.forEach(function (img) {
+        img.style.transform = "translateY(" + shift + "px)";
+      });
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { requestAnimationFrame(applyParallax); ticking = true; }
+    }, { passive: true });
+    applyParallax();
+  }
+
+  // --- pulso del CTA principal, una sola vez cuando entra en pantalla -------
+  if (!reduced) {
+    var pulseButtons = document.querySelectorAll("[data-pulse]");
+    var ioPulse = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("pulse-once");
+        ioPulse.unobserve(entry.target);
+      });
+    }, { threshold: 0.8 });
+    pulseButtons.forEach(function (el) { ioPulse.observe(el); });
+  }
+})();
+</script>
 
 </body>
 </html>
