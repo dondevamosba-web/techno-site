@@ -8,22 +8,18 @@
 <meta property="og:title" content="Techno — más de 100 modelos, directo de USA">
 <meta property="og:description" content="Apple, Samsung, Xiaomi y PlayStation traídos de USA. Estamos en Olavarría; entregamos en mano en toda la zona.">
 <meta property="og:image" content="img/guido-retrato.jpg">
-<meta name="theme-color" content="#14653F">
+<meta name="theme-color" content="#111110">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FFFFFF; --card:#FFFFFF; --ink:#1A1815; --muted:#6E675E;
-  --rule:#E4DED5; --accent:#14653F; --accent-ink:#FFFFFF; --accent-soft:#14653F14;
+  --paper:#111110; --card:#1A1917; --ink:#F5F3EE; --muted:#A19A8E;
+  --rule:#2E2B26; --accent:#3FA97A; --accent-ink:#0B1F16; --accent-soft:#3FA97A1F;
   --display:'Archivo',system-ui,sans-serif;
   --body:'IBM Plex Sans',system-ui,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
   --wrap:1100px;
-}
-@media (prefers-color-scheme:dark){
-  :root{ --paper:#1D1B17; --card:#1D1B17; --ink:#F0EDE7; --muted:#A19A8E;
-         --rule:#33302A; --accent:#3FA97A; --accent-ink:#0B1F16; --accent-soft:#3FA97A1A; }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -66,18 +62,21 @@ p{margin:0}
             color:var(--muted);display:block;text-transform:uppercase;margin-top:-2px}
 .bar .btn{margin-left:auto;padding:10px 17px;font-size:.9rem}
 
-/* hero */
-.hero .wrap{display:grid;gap:32px}
-@media(min-width:860px){
-  .hero .wrap{grid-template-columns:1fr .82fr;gap:56px;align-items:center}
-}
-.hero-copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
-.hero-fig{margin:0}
-.hero-fig img,.hero-fig svg{width:100%;border:1px solid var(--rule);
-              max-height:460px;object-fit:cover;object-position:center 22%;display:block}
-@media(min-width:860px){.hero-fig img,.hero-fig svg{max-height:600px}}
-.hero-fig figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted);
-                     margin-top:10px;letter-spacing:.02em}
+/* hero — reveal de producto: foto grande de fondo, tipografía enorme encima */
+.hero{position:relative;padding:0;overflow:hidden;min-height:88vh;display:flex;
+       align-items:flex-end;isolation:isolate}
+.hero-fig{position:absolute;inset:0;margin:0;z-index:0}
+.hero-fig img{width:100%;height:100%;object-fit:cover;object-position:center 30%;
+              transform:scale(1.06) rotate(-1.2deg);transform-origin:60% 40%}
+.hero-scrim{position:absolute;inset:0;z-index:1;
+            background:linear-gradient(180deg,rgba(17,17,16,.15) 0%,rgba(17,17,16,.55) 55%,rgba(17,17,16,.96) 100%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:64px;padding-top:120px;width:100%}
+@media(min-width:860px){.hero .wrap{padding-bottom:88px;padding-top:160px}}
+.hero-copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start;max-width:820px}
+.hero-copy h1{font-size:clamp(2.6rem,9vw,5.4rem);color:#fff}
+.hero-copy .lede{color:#D8D4CA}
+.hero-copy .eyebrow{color:var(--accent);background:var(--accent-soft);
+                    padding:6px 12px;letter-spacing:.14em}
 .trust-line{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.88rem;color:var(--muted);
             font-weight:500}
 .trust-line b{color:var(--ink);font-weight:600}
@@ -225,11 +224,15 @@ footer a:hover{color:var(--ink)}
 <main>
 
   <section class="hero">
+    <figure class="hero-fig" data-parallax>
+      <img src="img/iphone-17-pro-256gb.jpg" alt="iPhone 17 Pro" width="1600" height="1600">
+    </figure>
+    <div class="hero-scrim"></div>
     <div class="wrap">
       <div class="hero-copy reveal">
         <p class="eyebrow">Catálogo completo · Apple · Samsung · Xiaomi · PlayStation</p>
-        <h1>Más de 100 modelos, directo de USA, al mejor precio de la zona.</h1>
-        <p class="lede">Traído sin intermediarios desde Estados Unidos. Estamos en Olavarría y entregamos en mano acá y en toda la zona: Azul, Tandil y alrededores.</p>
+        <h1>Directo de USA. Sin intermediarios.</h1>
+        <p class="lede">Más de 100 modelos al mejor precio de la zona. Estamos en Olavarría y entregamos en mano acá y en toda la zona: Azul, Tandil y alrededores.</p>
         <a class="btn" data-pulse href="https://wa.me/5491162310105?text=Hola%20Guido%2C%20vi%20la%20p%C3%A1gina.%20Quer%C3%ADa%20consultarte%20por..."
            target="_blank" rel="noopener">Escribime por WhatsApp</a>
         <div class="trust-line">
@@ -238,85 +241,6 @@ footer a:hover{color:var(--ink)}
           <span>Envíos al <b>resto del país</b></span>
         </div>
       </div>
-      <figure class="hero-fig reveal" style="transition-delay:.12s" data-parallax>
-        <svg viewBox="0 0 200 300" role="img" aria-label="Caricatura de Guido sonriendo, con un producto en la mano y estantes de mercadería detrás">
-          <rect width="200" height="300" style="fill:var(--accent-soft)"/>
-          <!-- estantes con productos, atras de todo -->
-          <rect x="0" y="46" width="200" height="7" fill="#8A6A4C"/>
-          <rect x="0" y="92" width="200" height="7" fill="#8A6A4C"/>
-          <g>
-            <rect x="10" y="26" width="18" height="20" rx="2" fill="#7FA8C9"/>
-            <rect x="34" y="26" width="16" height="20" rx="2" fill="#D98B72"/>
-            <rect x="156" y="26" width="16" height="20" rx="2" fill="#B8B0A6"/>
-            <rect x="176" y="24" width="16" height="22" rx="2" fill="#6FA98A"/>
-            <rect x="8" y="70" width="16" height="22" rx="2" fill="#D9B27C"/>
-            <rect x="30" y="72" width="14" height="20" rx="2" fill="#7FA8C9"/>
-            <rect x="158" y="72" width="15" height="20" rx="2" fill="#D98B72"/>
-            <rect x="178" y="70" width="16" height="22" rx="2" fill="#8FAF8A"/>
-          </g>
-          <!-- cuello -->
-          <rect x="86" y="128" width="28" height="30" rx="8" fill="#B97A50"/>
-          <!-- hombros / torso de buzo -->
-          <path d="M28 300 Q34 168 100 150 Q166 168 172 300 Z" fill="#221D19"/>
-          <!-- caja de producto, sostenida en la mano -->
-          <rect x="90" y="172" width="46" height="58" rx="4" fill="#F3EFE7" stroke="#D8D0C2" stroke-width="1"/>
-          <rect x="99" y="182" width="28" height="34" rx="2" fill="#6FA98A"/>
-          <rect x="102" y="220" width="22" height="4" fill="#D8D0C2"/>
-          <!-- brazo: hombro -> mano, un solo trazo curvo -->
-          <path d="M145 170 Q168 185 128 208" fill="none" stroke="#221D19" stroke-width="17" stroke-linecap="round"/>
-          <ellipse cx="123" cy="205" rx="11" ry="11" fill="#C68657"/>
-          <!-- orejas -->
-          <ellipse cx="44" cy="106" rx="9" ry="13" fill="#C68657"/>
-          <ellipse cx="156" cy="106" rx="9" ry="13" fill="#C68657"/>
-          <circle cx="44" cy="116" r="3.4" fill="none" stroke="#E7C77A" stroke-width="2.2"/>
-          <!-- cabeza -->
-          <ellipse cx="100" cy="98" rx="50" ry="56" fill="#C68657"/>
-          <!-- sombra de mandibula -->
-          <path d="M62 118 Q100 152 138 118 Q136 138 100 146 Q64 138 62 118 Z" fill="#B5713F" opacity=".35"/>
-          <!-- cachetes sonrosados -->
-          <ellipse cx="75" cy="114" rx="9" ry="6" fill="#E08C6E"/>
-          <ellipse cx="125" cy="114" rx="9" ry="6" fill="#E08C6E"/>
-          <!-- pelo -->
-          <path d="M48 92
-                   Q40 44 100 38
-                   Q160 44 152 92
-                   Q150 70 140 66
-                   Q142 50 122 44
-                   Q126 56 112 50
-                   Q108 38 90 44
-                   Q96 54 82 50
-                   Q70 46 64 62
-                   Q66 50 54 62
-                   Q46 70 48 92 Z" fill="#241A12"/>
-          <rect x="44" y="68" width="10" height="36" rx="5" fill="#241A12"/>
-          <rect x="146" y="68" width="10" height="36" rx="5" fill="#241A12"/>
-          <!-- cejas, curva relajada -->
-          <path d="M71 90 Q82 82 93 89" fill="none" stroke="#241A12" stroke-width="4" stroke-linecap="round"/>
-          <path d="M107 89 Q118 82 129 90" fill="none" stroke="#241A12" stroke-width="4" stroke-linecap="round"/>
-          <!-- ojos -->
-          <ellipse cx="83" cy="100" rx="8" ry="6.5" fill="#fff"/>
-          <ellipse cx="117" cy="100" rx="8" ry="6.5" fill="#fff"/>
-          <circle cx="84" cy="101" r="4" fill="#241A12"/>
-          <circle cx="116" cy="101" r="4" fill="#241A12"/>
-          <!-- nariz -->
-          <path d="M99 100 L101 114" fill="none" stroke="#A9673B" stroke-width="2" stroke-linecap="round"/>
-          <path d="M94 116 Q100 122 106 116" fill="none" stroke="#A9673B" stroke-width="2" stroke-linecap="round"/>
-          <!-- bigote + barba candado, mas abiertos para la sonrisa -->
-          <path d="M76 122
-                   Q84 116 100 118
-                   Q116 116 124 122
-                   Q118 120 112 123
-                   Q106 119 100 122
-                   Q94 119 88 123
-                   Q82 120 76 122 Z" fill="#241A12"/>
-          <path d="M84 126 Q86 141 100 148 Q114 141 116 126
-                   Q112 134 100 137 Q88 134 84 126 Z" fill="#241A12"/>
-          <!-- sonrisa grande, con dientes -->
-          <path d="M88 124 Q100 138 112 124 Q100 136 88 124 Z" fill="#fff"/>
-          <path d="M88 124 Q100 138 112 124" fill="none" stroke="#7A4426" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <figcaption>Guido — Techno, Olavarría.</figcaption>
-      </figure>
     </div>
   </section>
 
