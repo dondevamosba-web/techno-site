@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FAF8F5; --card:#FFFFFF; --ink:#1A1815; --muted:#6E675E;
+  --paper:#FFFFFF; --card:#FFFFFF; --ink:#1A1815; --muted:#6E675E;
   --rule:#E4DED5; --accent:#14653F; --accent-ink:#FFFFFF; --accent-soft:#14653F14;
   --display:'Archivo',system-ui,sans-serif;
   --body:'IBM Plex Sans',system-ui,sans-serif;
@@ -22,7 +22,7 @@
   --wrap:1100px;
 }
 @media (prefers-color-scheme:dark){
-  :root{ --paper:#14130F; --card:#1D1B17; --ink:#F0EDE7; --muted:#A19A8E;
+  :root{ --paper:#1D1B17; --card:#1D1B17; --ink:#F0EDE7; --muted:#A19A8E;
          --rule:#33302A; --accent:#3FA97A; --accent-ink:#0B1F16; --accent-soft:#3FA97A1A; }
 }
 *{box-sizing:border-box}
@@ -523,13 +523,18 @@ footer a:hover{color:var(--ink)}
     ioMap.observe(mapStage);
   }
 
+  // contorno real de los 3 partidos (OpenStreetMap / Overpass, simplificado
+  // con Douglas-Peucker), proyectado a un plano local en km*escala. No es
+  // un mapa esquematico: son los limites administrativos reales.
+  var PARTIDOS = {"Olavarría":{"ring":[[-1.426,-1.197],[-1.596,-1.367],[-1.712,-1.249],[-2.144,-1.686],[-2.03,-1.8],[-2.317,-2.09],[-2.299,-2.108],[-2.385,-2.181],[-2.403,-2.16],[-2.632,-2.356],[-2.894,-2.1],[-2.987,-2.194],[-3.275,-1.906],[-3.34,-1.972],[-4.154,-1.151],[-4.832,-0.495],[-3.661,0.711],[-3.099,0.164],[-2.822,0.44],[-2.864,0.484],[-2.553,0.798],[-2.564,0.81],[-2.42,0.954],[-2.408,0.944],[-2.025,1.325],[-1.572,0.87],[-1.584,0.858],[-1.352,0.618],[-1.371,0.6],[-1.242,0.465],[-1.249,0.458],[-1.191,0.397],[-1.199,0.39],[-1.14,0.33],[-1.197,0.274],[-1.14,0.214],[-1.163,0.191],[-1.105,0.131],[-1.13,0.106],[-1.071,0.046],[-1.111,0.007],[-1.054,-0.052],[-1.085,-0.082],[-0.965,-0.198],[-0.952,-0.186],[-0.895,-0.246],[-0.904,-0.254],[-0.846,-0.316],[-0.875,-0.343],[-0.819,-0.403],[-0.86,-0.444],[-0.803,-0.504],[-0.84,-0.541],[-0.784,-0.602],[-1.053,-0.849],[-1.066,-0.836],[-1.426,-1.197]],"centroid":[-2.691,-0.521]},"Tandil":{"ring":[[2.99,1.641],[3.168,1.451],[2.115,0.458],[2.094,0.475],[1.883,0.287],[1.44,-0.138],[1.461,-0.168],[1.453,-0.176],[1.04,-0.564],[1.024,-0.545],[1.05,-0.449],[1.039,-0.38],[1.015,-0.357],[1.012,-0.316],[0.972,-0.234],[0.939,-0.197],[0.924,-0.116],[0.895,-0.106],[0.88,-0.05],[0.828,-0.014],[0.83,0.009],[0.816,0.023],[0.819,0.061],[0.749,0.08],[0.688,0.123],[0.58,0.282],[0.522,0.275],[0.492,0.324],[0.447,0.338],[0.403,0.395],[0.394,0.42],[0.406,0.433],[0.393,0.459],[0.284,0.532],[0.235,0.605],[0.21,0.605],[0.159,0.634],[0.14,0.678],[0.102,0.693],[0.085,0.714],[0.07,0.758],[0.023,0.792],[-0.08,0.801],[-0.095,0.821],[-0.156,0.834],[0.669,1.626],[0.687,1.61],[0.869,1.793],[0.881,1.781],[0.938,1.837],[0.933,1.846],[1.421,2.308],[1.538,2.185],[1.588,2.217],[1.617,2.258],[1.615,2.304],[1.63,2.331],[1.612,2.359],[1.579,2.484],[1.594,2.544],[1.591,2.614],[1.612,2.65],[1.648,2.649],[1.686,2.698],[1.696,2.719],[1.693,2.77],[1.736,2.802],[1.733,2.841],[1.752,2.867],[1.752,2.891],[1.74,2.901],[1.748,2.932],[2.219,2.45],[2.277,2.368],[2.338,2.306],[2.347,2.316],[2.462,2.199],[2.99,1.641]],"centroid":[1.543,1.184]},"Azul":{"ring":[[-1.352,0.618],[-0.747,1.198],[-0.892,1.346],[-0.648,1.582],[-0.384,1.309],[-0.441,1.254],[-0.288,1.095],[-0.263,0.951],[-0.231,0.882],[-0.16,0.848],[-0.148,0.826],[-0.103,0.824],[-0.08,0.801],[0.023,0.792],[0.07,0.758],[0.085,0.714],[0.102,0.693],[0.14,0.678],[0.159,0.634],[0.21,0.605],[0.235,0.605],[0.284,0.532],[0.393,0.459],[0.406,0.433],[0.394,0.42],[0.403,0.395],[0.447,0.338],[0.492,0.324],[0.522,0.275],[0.58,0.282],[0.688,0.123],[0.749,0.08],[0.819,0.061],[0.816,0.023],[0.83,0.009],[0.828,-0.014],[0.88,-0.05],[0.895,-0.106],[0.924,-0.116],[0.939,-0.197],[0.972,-0.234],[1.012,-0.316],[1.015,-0.357],[1.039,-0.38],[1.05,-0.449],[1.024,-0.545],[1.054,-0.608],[1.074,-0.616],[1.063,-0.639],[1.077,-0.669],[1.198,-0.774],[1.213,-0.801],[1.227,-0.798],[1.26,-0.857],[1.274,-0.916],[1.267,-0.933],[1.278,-0.933],[1.28,-0.97],[1.315,-1.032],[1.322,-1.149],[1.339,-1.159],[1.339,-1.27],[1.364,-1.283],[1.379,-1.34],[1.4,-1.347],[1.417,-1.377],[1.418,-1.423],[1.439,-1.444],[1.419,-1.466],[1.437,-1.503],[1.433,-1.531],[1.508,-1.469],[1.672,-1.642],[1.487,-1.817],[1.52,-1.853],[1.351,-2.016],[1.408,-2.077],[0.674,-2.766],[0.477,-2.557],[0.489,-2.545],[0.263,-2.292],[-0.004,-2.549],[-0.265,-2.279],[-0.279,-2.293],[-0.39,-2.187],[-0.483,-2.071],[-0.475,-2.063],[-0.547,-1.992],[-0.535,-1.979],[-0.591,-1.919],[-0.585,-1.913],[-0.7,-1.791],[-0.722,-1.814],[-0.851,-1.681],[-0.553,-1.385],[-0.785,-1.148],[-0.778,-1.14],[-0.857,-1.058],[-0.866,-1.067],[-0.963,-0.969],[-1.165,-1.171],[-1.186,-1.151],[-1.176,-1.121],[-1.201,-1.056],[-1.242,-1.011],[-1.066,-0.836],[-1.053,-0.849],[-0.784,-0.601],[-0.84,-0.541],[-0.803,-0.505],[-0.86,-0.445],[-0.819,-0.403],[-0.875,-0.343],[-0.846,-0.316],[-0.952,-0.186],[-0.965,-0.198],[-1.085,-0.082],[-1.054,-0.052],[-1.111,0.007],[-1.071,0.046],[-1.13,0.106],[-1.105,0.131],[-1.163,0.191],[-1.14,0.214],[-1.197,0.274],[-1.14,0.33],[-1.199,0.39],[-1.191,0.397],[-1.249,0.458],[-1.242,0.465],[-1.371,0.6],[-1.352,0.618]],"centroid":[0.081,-0.775]}};
+
   function initRouteScene(stage, reducedMotion) {
     import("https://unpkg.com/three@0.170.0/build/three.module.min.js")
       .then(function (THREE) {
         var css = getComputedStyle(document.documentElement);
         var accent = css.getPropertyValue("--accent").trim() || "#14653F";
         var ink = css.getPropertyValue("--ink").trim() || "#1A1815";
-        var paper = css.getPropertyValue("--paper").trim() || "#FAF8F5";
+        var rule = css.getPropertyValue("--rule").trim() || "#E4DED5";
 
         var canvas = document.createElement("canvas");
         stage.appendChild(canvas);
@@ -538,50 +543,66 @@ footer a:hover{color:var(--ink)}
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-        camera.position.set(0, 5.2, 6.4);
+        var camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+        camera.position.set(0, 7.5, 6.8);
         camera.lookAt(0, 0, 0);
 
-        scene.add(new THREE.AmbientLight(0xffffff, 0.9));
+        scene.add(new THREE.AmbientLight(0xffffff, 1.0));
         var dir = new THREE.DirectionalLight(0xffffff, 0.7);
-        dir.position.set(3, 6, 4);
+        dir.position.set(3, 8, 4);
         scene.add(dir);
 
-        // posiciones relativas: Olavarria (oeste), Azul (norte), Tandil (sudeste)
-        var pOlavarria = new THREE.Vector3(-2.6, 0, 0.6);
-        var pAzul = new THREE.Vector3(-0.3, 0, -1.9);
-        var pTandil = new THREE.Vector3(2.8, 0, 1.7);
+        var group = new THREE.Group();
+        scene.add(group);
 
-        var curve = new THREE.CatmullRomCurve3([pOlavarria, pAzul, pTandil]);
-        var tubeGeo = new THREE.TubeGeometry(curve, 64, 0.05, 8, false);
-        var tubeMat = new THREE.MeshStandardMaterial({ color: accent, roughness: 0.5 });
-        scene.add(new THREE.Mesh(tubeGeo, tubeMat));
+        // Olavarria es la base (acento pleno); Azul y Tandil, zona de
+        // entrega (tono mas apagado) - misma jerarquia que el resto del sitio.
+        var homeMat = new THREE.MeshStandardMaterial({ color: accent, roughness: 0.65 });
+        var zoneMat = new THREE.MeshStandardMaterial({ color: rule, roughness: 0.8 });
+        var edgeMat = new THREE.LineBasicMaterial({ color: ink, transparent: true, opacity: 0.35 });
 
-        function addPin(pos) {
-          var group = new THREE.Group();
-          var cone = new THREE.Mesh(
-            new THREE.ConeGeometry(0.14, 0.4, 16),
-            new THREE.MeshStandardMaterial({ color: ink, roughness: 0.4 })
+        var centroids = {};
+        Object.keys(PARTIDOS).forEach(function (name) {
+          var data = PARTIDOS[name];
+          var shape = new THREE.Shape(data.ring.map(function (p) {
+            return new THREE.Vector2(p[0], p[1]);
+          }));
+          var geo = new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: false });
+          var mesh = new THREE.Mesh(geo, name === "Olavarría" ? homeMat : zoneMat);
+          mesh.rotation.x = -Math.PI / 2;
+          group.add(mesh);
+
+          var edgeGeo = new THREE.BufferGeometry().setFromPoints(
+            data.ring.map(function (p) { return new THREE.Vector3(p[0], 0.065, p[1]); })
           );
-          cone.rotation.x = Math.PI;
-          cone.position.y = 0.32;
-          var head = new THREE.Mesh(
-            new THREE.SphereGeometry(0.13, 16, 16),
-            new THREE.MeshStandardMaterial({ color: accent, emissive: accent, emissiveIntensity: 0.35 })
+          group.add(new THREE.LineLoop(edgeGeo, edgeMat));
+
+          centroids[name] = new THREE.Vector3(data.centroid[0], 0.09, data.centroid[1]);
+        });
+
+        function addMarker(pos, big) {
+          var m = new THREE.Mesh(
+            new THREE.SphereGeometry(big ? 0.11 : 0.08, 16, 16),
+            new THREE.MeshStandardMaterial({ color: accent, emissive: accent, emissiveIntensity: 0.4 })
           );
-          head.position.y = 0.55;
-          group.add(cone, head);
-          group.position.copy(pos);
-          scene.add(group);
+          m.position.copy(pos);
+          group.add(m);
         }
-        [pOlavarria, pAzul, pTandil].forEach(addPin);
+        addMarker(centroids["Olavarría"], true);
+        addMarker(centroids["Azul"], false);
+        addMarker(centroids["Tandil"], false);
+
+        // ruta real: Olavarria -> Azul -> Tandil, el orden geografico real
+        var curve = new THREE.CatmullRomCurve3([
+          centroids["Olavarría"], centroids["Azul"], centroids["Tandil"]
+        ]);
 
         // punto viajando por la ruta: la entrega en camino
         var traveler = new THREE.Mesh(
-          new THREE.SphereGeometry(0.09, 16, 16),
-          new THREE.MeshStandardMaterial({ color: accent, emissive: accent, emissiveIntensity: 0.8 })
+          new THREE.SphereGeometry(0.065, 16, 16),
+          new THREE.MeshStandardMaterial({ color: accent, emissive: accent, emissiveIntensity: 0.9 })
         );
-        scene.add(traveler);
+        group.add(traveler);
 
         function resize() {
           var w = stage.clientWidth, h = stage.clientHeight;
@@ -599,9 +620,9 @@ footer a:hover{color:var(--ink)}
           var elapsed = (t - start) % DURATION;
           var progress = elapsed / DURATION;
           var pos = curve.getPointAt(progress);
-          traveler.position.copy(pos);
+          traveler.position.set(pos.x, 0.1, pos.z);
           if (!reducedMotion) {
-            scene.rotation.y = Math.sin(t * 0.00012) * 0.18;
+            group.rotation.y = Math.sin(t * 0.00012) * 0.16;
           }
           renderer.render(scene, camera);
           requestAnimationFrame(frame);
