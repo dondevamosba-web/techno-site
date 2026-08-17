@@ -73,9 +73,9 @@ p{margin:0}
 }
 .hero-copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
 .hero-fig{margin:0}
-.hero-fig img{width:100%;border:1px solid var(--rule);
-              max-height:460px;object-fit:cover;object-position:center 22%}
-@media(min-width:860px){.hero-fig img{max-height:600px}}
+.hero-fig img,.hero-fig svg{width:100%;border:1px solid var(--rule);
+              max-height:460px;object-fit:cover;object-position:center 22%;display:block}
+@media(min-width:860px){.hero-fig img,.hero-fig svg{max-height:600px}}
 .hero-fig figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted);
                      margin-top:10px;letter-spacing:.02em}
 .trust-line{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.88rem;color:var(--muted);
@@ -110,7 +110,7 @@ p{margin:0}
 .reveal-item:nth-child(8){transition-delay:.52s}
 
 /* parallax sutil en la foto del hero */
-.hero-fig img{will-change:transform}
+.hero-fig img,.hero-fig svg{will-change:transform}
 
 /* pulso suave en el CTA principal, una sola vez */
 @keyframes pulse-ring{
@@ -239,7 +239,58 @@ footer a:hover{color:var(--ink)}
         </div>
       </div>
       <figure class="hero-fig reveal" style="transition-delay:.12s" data-parallax>
-        <img src="img/guido-retrato.jpg" alt="Retrato en blanco y negro de Guido, de Techno" width="768" height="1024">
+        <svg viewBox="0 0 200 300" role="img" aria-label="Caricatura de Guido, de Techno">
+          <rect width="200" height="300" style="fill:var(--accent-soft)"/>
+          <!-- cuello -->
+          <rect x="86" y="128" width="28" height="30" rx="8" fill="#B97A50"/>
+          <!-- hombros / torso de buzo -->
+          <path d="M28 300 Q34 168 100 150 Q166 168 172 300 Z" fill="#221D19"/>
+          <!-- orejas -->
+          <ellipse cx="44" cy="106" rx="9" ry="13" fill="#C68657"/>
+          <ellipse cx="156" cy="106" rx="9" ry="13" fill="#C68657"/>
+          <circle cx="44" cy="116" r="3.4" fill="none" stroke="#E7C77A" stroke-width="2.2"/>
+          <!-- cabeza -->
+          <ellipse cx="100" cy="98" rx="50" ry="56" fill="#C68657"/>
+          <!-- sombra de mandibula -->
+          <path d="M62 118 Q100 152 138 118 Q136 138 100 146 Q64 138 62 118 Z" fill="#B5713F" opacity=".35"/>
+          <!-- pelo -->
+          <path d="M48 92
+                   Q40 44 100 38
+                   Q160 44 152 92
+                   Q150 70 140 66
+                   Q142 50 122 44
+                   Q126 56 112 50
+                   Q108 38 90 44
+                   Q96 54 82 50
+                   Q70 46 64 62
+                   Q66 50 54 62
+                   Q46 70 48 92 Z" fill="#241A12"/>
+          <rect x="44" y="68" width="10" height="36" rx="5" fill="#241A12"/>
+          <rect x="146" y="68" width="10" height="36" rx="5" fill="#241A12"/>
+          <!-- cejas -->
+          <rect x="72" y="86" width="20" height="6" rx="3" fill="#241A12" transform="rotate(-4 82 89)"/>
+          <rect x="108" y="86" width="20" height="6" rx="3" fill="#241A12" transform="rotate(4 118 89)"/>
+          <!-- ojos -->
+          <ellipse cx="83" cy="100" rx="8" ry="6.5" fill="#fff"/>
+          <ellipse cx="117" cy="100" rx="8" ry="6.5" fill="#fff"/>
+          <circle cx="84" cy="101" r="4" fill="#241A12"/>
+          <circle cx="116" cy="101" r="4" fill="#241A12"/>
+          <!-- nariz -->
+          <path d="M99 100 L101 114" fill="none" stroke="#A9673B" stroke-width="2" stroke-linecap="round"/>
+          <path d="M94 116 Q100 122 106 116" fill="none" stroke="#A9673B" stroke-width="2" stroke-linecap="round"/>
+          <!-- bigote + barba candado, conectados -->
+          <path d="M76 122
+                   Q84 116 100 118
+                   Q116 116 124 122
+                   Q118 120 112 123
+                   Q106 119 100 122
+                   Q94 119 88 123
+                   Q82 120 76 122 Z" fill="#241A12"/>
+          <path d="M84 126 Q88 144 100 146 Q112 144 116 126
+                   Q112 138 100 139 Q88 138 84 126 Z" fill="#241A12"/>
+          <!-- boca -->
+          <path d="M92 130 Q100 135 108 130" fill="none" stroke="#7A4426" stroke-width="2" stroke-linecap="round"/>
+        </svg>
         <figcaption>Guido — Techno, Olavarría.</figcaption>
       </figure>
     </div>
@@ -560,7 +611,7 @@ footer a:hover{color:var(--ink)}
   }
 
   // --- parallax sutil en la foto del hero, con rAF ---------------------------
-  var figs = document.querySelectorAll("[data-parallax] img");
+  var figs = document.querySelectorAll("[data-parallax] img, [data-parallax] svg");
   if (!reduced && figs.length) {
     var ticking = false;
     function applyParallax() {
