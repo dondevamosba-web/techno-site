@@ -209,6 +209,22 @@ footer a:hover{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+@media(min-width:1440px){
+  :root{--wrap:1400px}
+  section{padding:120px 0}
+  h1{font-size:clamp(2.4rem,6vw,4.6rem)}
+  h2{font-size:clamp(1.7rem,3.4vw,2.9rem)}
+  .hero-copy{max-width:980px}
+  .hero-copy h1{font-size:clamp(3.2rem,7vw,7.6rem)}
+  .hero .wrap{padding-top:190px;padding-bottom:140px}
+  .grid{grid-template-columns:repeat(5,1fr);gap:24px}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(700px circle at 4% 20%, rgba(63,169,122,0.08), transparent 60%),
+      radial-gradient(780px circle at 96% 78%, rgba(63,169,122,0.10), transparent 60%);
+  }
+}
 </style>
 </head>
 <body>
